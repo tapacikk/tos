@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+# Removing unused packages
+apt-get autoremove --yes || true
+
+# Removing unused files
+rm -rf /var/cache/man/*
+
+# getting my rcfiles
+git clone https://github.com/tapacikk/dotfiles /tmp/dotfiles --depth 1
+cd /tmp/dotfiles
+cp -r dot_local/ /etc/skel/.local
+cp .bashrc .offlineimaprc .vimrc .zshrc .msmtprc .tmux.conf .xinitrc /etc/skel
+cd 
+rm -rf /tmp/dotfiles
+
