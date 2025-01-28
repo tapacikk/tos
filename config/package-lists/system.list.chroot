@@ -14,3 +14,8 @@ pulseaudio
 zathura
 sudo
 user-setup
+stow
+tar
+vim
+wget
+curl

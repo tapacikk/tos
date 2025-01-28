@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# unpacking the chemcraft tarball
+cd /etc/skel/src
+mkdir -p /etc/skel/.local/bin
+mkdir -p chemcraft; cd chemcraft
+tar xf /etc/skel/src/tarballs/Chemcraft_b82_lin32.tar.gz
+cd /etc/skel/.local/bin
+ln -s /etc/skel/src/chemcraft/Chemcraft ./chem
+cd

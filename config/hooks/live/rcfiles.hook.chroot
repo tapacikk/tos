@@ -9,10 +9,22 @@ apt-get autoremove --yes || true
 rm -rf /var/cache/man/*
 
 # getting my rcfiles
-git clone https://github.com/tapacikk/dotfiles /tmp/dotfiles --depth 1
-cd /tmp/dotfiles
-cp -r dot_local/ /etc/skel/.local
-cp .bashrc .offlineimaprc .vimrc .zshrc .msmtprc .tmux.conf .xinitrc /etc/skel
-cd 
-rm -rf /tmp/dotfiles
+mkdir -p /etc/skel/.local
+mkdir -p /etc/skel/.config
+mkdir -p /opt/dotfiles
+git clone https://github.com/tapacikk/dotfiles /opt/dotfiles --depth 1
+cd /opt/dotfiles/dot_local
+stow --target=/etc/skel/.local .
+cd /opt/dotfiles/dot_config
+stow --target=/etc/skel/.config .
+cd /opt/dotfiles
+rm /etc/skel/.bashrc
+stow --target=/etc/skel/ .
+cd
 
+#getting my scripts
+mkdir -p /opt/tscripts
+git clone https://github.com/tapacikk/tscripts /opt/tscripts --depth 1
+cd /opt/tscripts
+stow --target=/etc/skel/.local/bin .
+cd

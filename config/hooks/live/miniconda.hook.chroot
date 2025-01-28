@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+# downloading miniconda
+cd /etc/skel/src/tarballs
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
