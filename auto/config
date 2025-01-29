@@ -5,7 +5,6 @@ set -e
 lb config noauto \
      -d bookworm \
      --archive-areas "main contrib non-free-firmware" \
-     --debootstrap-options "--variant=minbase" \
      --debian-installer live \
      --debian-installer-distribution bookworm \
      --debian-installer-gui false \
