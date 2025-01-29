@@ -8,23 +8,28 @@ apt-get autoremove --yes || true
 # Removing unused files
 rm -rf /var/cache/man/*
 
+
+# define and obtain the files
+rm /etc/skel/.bashrc
+export DOTFILES_PATH=/etc/skel/src/dotfiles
+export TSCRIPTS_PATH=/etc/skel/src/tscripts
+mkdir -p $DOTFILES_PATH
+mkdir -p $TSCRIPTS_PATH
+git clone https://github.com/tapacikk/dotfiles $DOTFILES_PATH --depth 1
+git clone https://github.com/tapacikk/tscripts $TSCRIPTS_PATH --depth 1
+
+
+
 # getting my rcfiles
 mkdir -p /etc/skel/.local
 mkdir -p /etc/skel/.config
-mkdir -p /opt/dotfiles
-git clone https://github.com/tapacikk/dotfiles /opt/dotfiles --depth 1
-cd /opt/dotfiles/dot_local
+cd $DOTFILES_PATH/dot_local
 stow --target=/etc/skel/.local .
-cd /opt/dotfiles/dot_config
+cd $DOTFILES_PATH/dot_config
 stow --target=/etc/skel/.config .
-cd /opt/dotfiles
-rm /etc/skel/.bashrc
+cd $DOTFILES_PATH
 stow --target=/etc/skel/ .
-cd
 
 #getting my scripts
-mkdir -p /opt/tscripts
-git clone https://github.com/tapacikk/tscripts /opt/tscripts --depth 1
-cd /opt/tscripts
+cd $TSCRIPTS_PATH
 stow --target=/etc/skel/.local/bin .
-cd
