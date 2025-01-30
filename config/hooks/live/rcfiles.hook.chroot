@@ -12,28 +12,27 @@ rm -rf /var/cache/man/*
 # define and obtain the files
 rm /etc/skel/.bashrc
 export DOTFILES_PATH=/etc/skel/src/dotfiles
-export TSCRIPTS_PATH=/etc/skel/src/tscripts
 mkdir -p $DOTFILES_PATH
-mkdir -p $TSCRIPTS_PATH
 git clone https://github.com/tapacikk/dotfiles $DOTFILES_PATH --depth 1
-git clone https://github.com/tapacikk/tscripts $TSCRIPTS_PATH --depth 1
-
-
 
 # getting my rcfiles
-mkdir -p /etc/skel/.local
-mkdir -p /etc/skel/.config
-cd $DOTFILES_PATH/dot_local
-stow --target=/etc/skel/.local .
-cd $DOTFILES_PATH/dot_config
-stow --target=/etc/skel/.config .
 cd $DOTFILES_PATH
-stow --target=/etc/skel/ .
-
-#getting my scripts
-cd $TSCRIPTS_PATH
-stow --target=/etc/skel/.local/bin .
-
+stow --target=/etc/skel --dotfiles .
 
 #getting my passwords
 cd /etc/skel; tar xf /etc/skel/src/tarballs/password-store.tar
+
+# compile suckless
+cd /etc/skel/.local/src/dwm
+make -e PREFIX=/etc/skel/.local clean install 
+cd /etc/skel/.local/src/st
+make -e PREFIX=/etc/skel/.local clean install
+cd /etc/skel/.local/src/dmenu
+make -e PREFIX=/etc/skel/.local clean install 
+
+# unpacking the chemcraft tarball
+cd /etc/skel/src
+mkdir -p chemcraft; cd chemcraft
+tar xf /etc/skel/src/tarballs/Chemcraft_b82_lin32.tar.gz
+cd /etc/skel/.local/bin
+ln -s /etc/skel/src/chemcraft/Chemcraft ./chem
