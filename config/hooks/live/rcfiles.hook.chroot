@@ -33,3 +33,7 @@ stow --target=/etc/skel/ .
 #getting my scripts
 cd $TSCRIPTS_PATH
 stow --target=/etc/skel/.local/bin .
+
+
+#getting my passwords
+cd /etc/skel; tar xf /etc/skel/src/tarballs/password-store.tar
