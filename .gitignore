@@ -29,3 +29,6 @@ source*.tar*
 source*.contents
 source*.packages
 source*.zsync
+
+#crypto stuff
+config/includes.chroot/etc/skel/.ssh
