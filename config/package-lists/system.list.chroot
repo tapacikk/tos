@@ -20,3 +20,4 @@ vim
 wget
 curl
 network-manager
+pass
